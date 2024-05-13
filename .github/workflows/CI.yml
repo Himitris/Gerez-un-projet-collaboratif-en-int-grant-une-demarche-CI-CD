@@ -32,11 +32,15 @@ jobs:
       - name: Run tests
         run: npm run test  -- --browsers=ChromeHeadlessNoSandbox
         working-directory: front
+        
       - name: Upload Test Report
-        uses: actions/upload-artifact@v2
+        uses: phoenix-actions/test-reporting@v8
+        id: test-report                     # Set ID reference for step
         with:
-          name: Test-Report
-          path: front/coverage/bobapp/index.html
+          artifact: test-results            # artifact name
+          name: JEST Tests                  # Name of the check run which will be created
+          path: front/coverage/bobapp/index.html                     # Path to test results (inside artifact .zip)
+          reporter: html            # Format of test results
 
   java:
     name: Spring Boot
@@ -62,8 +66,12 @@ jobs:
       - name: Generate Jacoco report
         run: mvn jacoco:report
         working-directory: back
+
       - name: Upload Test Report
-        uses: actions/upload-artifact@v2
+        uses: phoenix-actions/test-reporting@v8
+        id: test-report                     # Set ID reference for step
         with:
-          name: Test-Report
-          path: back/target/site/jacoco/jacoco.xml
+          artifact: test-results            # artifact name
+          name: JEST Tests                  # Name of the check run which will be created
+          path: back/target/site/jacoco/index.html                     # Path to test results (inside artifact .zip)
+          reporter: html
