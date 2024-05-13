@@ -32,7 +32,7 @@ jobs:
       working-directory: front
     
     - name: Test and generate coverage report for Front-end
-      run: npm run test -- --coverage
+      run: npm run test
       working-directory: front
       
     - name: Upload Front-end coverage report
