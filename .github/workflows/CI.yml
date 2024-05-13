@@ -62,3 +62,8 @@ jobs:
       - name: Generate Jacoco report
         run: mvn jacoco:report
         working-directory: back
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test-Report
+          path: back/target/site/jacoco/jacoco.xml
