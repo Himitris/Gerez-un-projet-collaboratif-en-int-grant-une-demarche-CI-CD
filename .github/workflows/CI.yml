@@ -34,7 +34,7 @@ jobs:
         working-directory: front
       # {5}
       - name: Run tests
-        run: npm run test
+        run: npm run test  -- --browsers=ChromeHeadlessNoSandbox
         working-directory: front
       # {6}
       - name: Build
