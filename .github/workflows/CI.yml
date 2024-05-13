@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: 11
+        
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install Front-end dependencies
+      run: npm install
+      working-directory: front
+    
+    - name: Test and generate coverage report for Front-end
+      run: npm run test -- --coverage
+      working-directory: front
+      
+    - name: Upload Front-end coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: front-coverage-report
+        path: front/coverage/lcov-report
+
+    - name: Install Back-end dependencies
+      run: mvn clean install
+      working-directory: back
+    
+    - name: Test and generate coverage report for Back-end
+      run: mvn test jacoco:report
+      working-directory: back
+      
+    - name: Upload Back-end coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: back-coverage-report
+        path: back/target/site/jacoco
+
