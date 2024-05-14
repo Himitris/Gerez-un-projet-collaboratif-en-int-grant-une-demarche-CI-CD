@@ -29,15 +29,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
         working-directory: front
-        
+
       - name: Run tests
         run: npm run test  -- --browsers=ChromeHeadlessNoSandbox
         working-directory: front
 
-      - name: Upload Jacoco report
+      - name: Upload Kamra report
         uses: actions/upload-artifact@v3
         with:
-          name: jacoco-report
+          name: karma-report
           path: front/coverage/bobapp/index.html
 
   java:
