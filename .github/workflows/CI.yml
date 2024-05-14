@@ -29,18 +29,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
         working-directory: front
+        
       - name: Run tests
         run: npm run test  -- --browsers=ChromeHeadlessNoSandbox
         working-directory: front
-        
-      - name: Upload Test Report
-        uses: phoenix-actions/test-reporting@v8
-        id: test-report                     # Set ID reference for step
+
+      - name: Upload Jacoco report
+        uses: actions/upload-artifact@v3
         with:
-          artifact: test-results            # artifact name
-          name: JEST Tests                  # Name of the check run which will be created
-          path: front/coverage/bobapp/cobertura-coverage.xml                    # Path to test results (inside artifact .zip)
-          reporter: jest-junit      # Format of test results
+          name: jacoco-report
+          path: front/coverage/bobapp/index.html
 
   java:
     name: Spring Boot
@@ -67,11 +65,8 @@ jobs:
         run: mvn jacoco:report
         working-directory: back
 
-      - name: Upload Test Report
-        uses: phoenix-actions/test-reporting@v8
-        id: test-report                     # Set ID reference for step
+      - name: Upload Jacoco report
+        uses: actions/upload-artifact@v3
         with:
-          artifact: test-results            # artifact name
-          name: JEST Tests                  # Name of the check run which will be created
-          path: back/target/site/jacoco/index.html                     # Path to test results (inside artifact .zip)
-          reporter: html
+          name: jacoco-report
+          path: back/target/site/jacoco/index.html  
