@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: karma-report
-          path: front/coverage/bobapp/index.html
+          path: front/coverage/bobapp
 
   java:
     name: Spring Boot
@@ -67,4 +67,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: jacoco-report
-          path: back/target/site/jacoco/index.html  
+          path: back/target/site/jacoco
