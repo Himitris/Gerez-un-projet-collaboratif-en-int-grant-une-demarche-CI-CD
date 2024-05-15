@@ -18,6 +18,15 @@ jobs:
         with:
           java-version: 17
           distribution: 'zulu' # Alternative distribution options are available.
+      - name: Setup Node.js $
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+      - name: Install dependencies
+        run: npm ci
+        working-directory: front
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
@@ -33,7 +42,7 @@ jobs:
 
       - name: Run SonarCloud Back
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Himitris_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD
         working-directory: back
