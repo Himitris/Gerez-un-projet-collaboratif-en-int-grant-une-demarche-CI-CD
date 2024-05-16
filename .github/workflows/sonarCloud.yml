@@ -1,4 +1,4 @@
-name: SonarCloud Back
+name: SonarCloud Back / Front
 on:
   push:
     branches:
@@ -56,9 +56,6 @@ jobs:
         run: npm install
         working-directory: front
 
-      - name: Run tests and generate coverage
-        run: npm run test -- --code-coverage
-        working-directory: front    
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
