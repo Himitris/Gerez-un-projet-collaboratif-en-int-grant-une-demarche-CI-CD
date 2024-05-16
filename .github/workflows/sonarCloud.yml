@@ -1,10 +1,12 @@
 name: SonarCloud Back / Front
+
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
+  workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
+
 jobs:
   back:
     name: Build and analyze
@@ -35,7 +37,7 @@ jobs:
         working-directory: back
       - name: SonarCloud Scan
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=bobappBack -Dsonar.projectName="BobApp Backend" -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml -Dsonar.tests=src/test/java -Dsonar.java.binaries=target/classes -Dsonar.language=java
@@ -46,11 +48,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20' 
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
@@ -58,12 +60,12 @@ jobs:
 
       - name: Run tests and generate coverage
         run: npm run test
-        working-directory: front   
-         
+        working-directory: front
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: ./front

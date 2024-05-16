@@ -7,16 +7,10 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Wait for tests
-        uses: ./.github/workflows/test-coverage.yml
+    uses: ./.github/workflows/test-coverage.yml
 
   sonarCloud:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Wait for quality test
-        uses: ./.github/workflows/sonarCloud.yml
+    uses: ./.github/workflows/sonarCloud.yml
 
   deploy:
     name: Build and Deploy Docker Images
