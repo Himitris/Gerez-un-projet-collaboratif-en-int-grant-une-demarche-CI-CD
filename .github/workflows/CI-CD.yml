@@ -7,10 +7,10 @@ on:
 
 jobs:
   test:
-    uses: ./.github/workflows/test-coverage.yml@main
+    uses: ./test-coverage.yml@main
 
   sonarCloud:
-    uses: ./.github/workflows/sonarCloud.yml@main
+    uses: ./sonarCloud.yml@main
 
   deploy:
     name: Build and Deploy Docker Images
