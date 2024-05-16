@@ -2,10 +2,6 @@ name: Angular / Java tests
 
 on:
   workflow_call:
-    inputs:
-      config-path:
-        required: true
-        type: string
 
 jobs:
   angular:
