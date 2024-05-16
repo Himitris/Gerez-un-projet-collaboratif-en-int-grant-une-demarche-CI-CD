@@ -1,14 +1,21 @@
 name: Docker deploy
+
 on:
-  workflow_run:
-    workflows: ["SonarCloud Back / Front", "Angular / Java tests"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
+
 jobs:
+  test:
+    uses: <owner>/<repo>/.github/workflows/test-coverage.yml@main
+
+  sonarCloud:
+    uses: <owner>/<repo>/.github/workflows/sonarCloud.yml@main
+    
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Build and Deploy Docker Images
     runs-on: ubuntu-latest
+    needs: [test, sonarCloud]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
