@@ -35,6 +35,12 @@ jobs:
         run: npm run test  -- --browsers=ChromeHeadlessNoSandbox
         working-directory: front
 
+      - name: Upload Karma report
+        uses: actions/upload-artifact@v4
+        with:
+          name: karma-report
+          path: front/coverage/bobapp
+
       - name: Pull latest changes
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -84,6 +90,12 @@ jobs:
       - name: Generate Jacoco report
         run: mvn jacoco:report
         working-directory: back
+
+      - name: Upload Jacoco report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: back/target/site/jacoco
 
       - name: Pull latest changes
         run: |
