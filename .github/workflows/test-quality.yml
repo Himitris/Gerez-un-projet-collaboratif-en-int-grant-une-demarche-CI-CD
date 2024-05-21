@@ -32,11 +32,18 @@ jobs:
         run: npm run test  -- --browsers=ChromeHeadlessNoSandbox
         working-directory: front
 
-      - name: Upload Kamra report
-        uses: actions/upload-artifact@v4
+      - name: Commit Karma report
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add front/coverage/bobapp
+          git commit -m "Add Karma report"
+
+      - name: Push Karma report
+        uses: ad-m/github-push-action@master
         with:
-          name: karma-report
-          path: front/coverage/bobapp
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
@@ -71,11 +78,18 @@ jobs:
         run: mvn jacoco:report
         working-directory: back
 
-      - name: Upload Jacoco report
-        uses: actions/upload-artifact@v4
+      - name: Commit Jacoco report
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add back/target/site/jacoco
+          git commit -m "Add Jacoco report"
+
+      - name: Push Jacoco report
+        uses: ad-m/github-push-action@master
         with:
-          name: jacoco-report
-          path: back/target/site/jacoco
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v4
