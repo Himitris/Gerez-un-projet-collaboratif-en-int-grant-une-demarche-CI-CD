@@ -1,12 +1,14 @@
 act.exe
 HELP.md
-target/
+target/*
+!target/site
+target/site/*
+!target/site/jacoco
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 node_modules/
 dist/
-**/coverage
 
 ### STS ###
 .apt_generated

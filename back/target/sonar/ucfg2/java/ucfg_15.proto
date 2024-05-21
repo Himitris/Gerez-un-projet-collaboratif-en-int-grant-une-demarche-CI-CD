@@ -1,0 +1,74 @@
+
+ccom.openclassrooms.bobapp.service.JokeService#getRandomJoke()Lcom/openclassrooms/bobapp/model/Joke;ª
+∞C:/Users/Himitris/Documents/OpenClassRoom/P10/Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD/back/src/main/java/com/openclassrooms/bobapp/service/JokeService.java ("1*⁄	
+1 (£
+†
+ (*/
+%0)com.openclassrooms.bobapp.data.JsonReader"__id*]
+
+__unknown_file (A*?/
+-com.openclassrooms.bobapp.service.JokeService"
+
+jsonReaderƒ¡
+ (5
+%1java.util.List"Dcom.openclassrooms.bobapp.data.JsonReader#getJokes()Ljava/util/List;*M
+
+__unknown_file (1
+/
+%0)com.openclassrooms.bobapp.data.JsonReader2
+getJokes()_
+]
+ (6
+jokesjava.util.List"__id*2
+
+__unknown_file (
+
+%1java.util.List64
+ (%
+%2java.util.Random"java.util.Randomd
+b
+ ('
+%3"java.util.Random#<init>()V*4
+
+__unknown_file (
+
+%2java.util.Randomg
+e
+ ((
+	generatorjava.util.Random"__id*4
+
+__unknown_file (
+
+%2java.util.Randomnl
+, (8	
+%4int"java.util.List#size()I*5
+
+__unknown_file (
+
+jokesjava.util.List2size()®•
+ (9	
+%5int"java.util.Random#nextInt(I)I*;
+
+__unknown_file (
+
+	generatorjava.util.Random*'
+
+__unknown_file (
+	
+%4int2
+nextInt(I)†
+ù
+ (%*
+%6$com.openclassrooms.bobapp.model.Joke"
+__arrayGet*5
+
+__unknown_file (
+
+jokesjava.util.List*"
+
+__unknown_file (
+"""8
+ (&,
+*
+%6$com.openclassrooms.bobapp.model.JokeB1/
+-com.openclassrooms.bobapp.service.JokeServiceH
