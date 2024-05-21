@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   angular:
+    if: "!contains(github.event.head_commit.message, 'Add Karma report') && !contains(github.event.head_commit.message, 'Add Jacoco report')"
     name: Angular
     runs-on: ubuntu-latest
     strategy:
@@ -39,6 +40,7 @@ jobs:
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          git pull
           git add front/coverage/bobapp
           git commit -m "Add Karma report"
 
@@ -57,6 +59,7 @@ jobs:
           projectBaseDir: ./front
 
   java:
+    if: "!contains(github.event.head_commit.message, 'Add Karma report') && !contains(github.event.head_commit.message, 'Add Jacoco report')"
     name: Spring Boot
     runs-on: ubuntu-latest
     steps:
@@ -81,10 +84,17 @@ jobs:
         run: mvn jacoco:report
         working-directory: back
 
+      - name: Pull latest changes
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git pull origin main  
+
       - name: Commit Jacoco report
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          git pull origin main
           git add back/target/site/jacoco
           git commit -m "Add Jacoco report"
 
