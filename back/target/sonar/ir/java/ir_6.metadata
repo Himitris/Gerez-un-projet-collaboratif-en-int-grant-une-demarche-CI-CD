@@ -1,8 +1,0 @@
-com.openclassrooms.bobapp.data.JsonReader#getJsonFile()V
-java.lang.Object#getClass()Ljava/lang/Class;
-java.lang.Class#getClassLoader()Ljava/lang/ClassLoader;
-java.lang.IllegalArgumentException#<init>(Ljava/lang/String;)V
-java.lang.IllegalArgumentException#instance-init#
-==
-getResourceAsStream java.lang.ClassLoader#getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream;
-readTree com.fasterxml.jackson.databind.ObjectMapper#readTree(Ljava/io/InputStream;)Lcom/fasterxml/jackson/databind/JsonNode;

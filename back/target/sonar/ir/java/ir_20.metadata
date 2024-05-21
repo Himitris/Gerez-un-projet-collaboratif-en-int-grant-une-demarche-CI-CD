@@ -1,8 +1,0 @@
-com.openclassrooms.bobapp.service.JokeService#getRandomJoke()Lcom/openclassrooms/bobapp/model/Joke;
-java.util.Random#instance-init#
-java.util.Random#<init>()V
-==
-nextInt java.util.Random#nextInt(I)I
-get java.util.List#get(I)Ljava/lang/Object;
-getJokes com.openclassrooms.bobapp.data.JsonReader#getJokes()Ljava/util/List;
-size java.util.List#size()I

@@ -1,16 +1,0 @@
-
-Dcom.openclassrooms.bobapp.model.Joke#getResponse()Ljava/lang/String;²
-§C:/Users/Himitris/Documents/OpenClassRoom/P10/Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD/back/src/main/java/com/openclassrooms/bobapp/model/Joke.java ("1*³
-1 (~
-|
- (
-%0java.lang.String"__id*R
-
-__unknown_file (6*4&
-$com.openclassrooms.bobapp.model.Joke"
-
-response"$
- (
-
-%0java.lang.StringB(&
-$com.openclassrooms.bobapp.model.JokeH

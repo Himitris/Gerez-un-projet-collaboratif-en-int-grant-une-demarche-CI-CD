@@ -1,5 +1,0 @@
-com.openclassrooms.bobapp.data.JsonReader#getJokes()Ljava/util/List;
-java.util.Arrays#asList([Ljava/lang/Object;)Ljava/util/List;
-==
-convertValue com.fasterxml.jackson.databind.ObjectMapper#convertValue(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
-get com.fasterxml.jackson.databind.JsonNode#get(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonNode;
