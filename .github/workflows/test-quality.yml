@@ -11,7 +11,6 @@ permissions:
 
 jobs:
   angular:
-    if: "!contains(github.event.head_commit.message, 'Add Karma report') && !contains(github.event.head_commit.message, 'Add Jacoco report')"
     name: Angular
     runs-on: ubuntu-latest
     strategy:
@@ -35,43 +34,13 @@ jobs:
       - name: Run tests
         run: npm run test  -- --browsers=ChromeHeadlessNoSandbox
         working-directory: front
-
-      - name: Commit Karma report
-        run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git pull
-          git add front/coverage/bobapp
-          git commit -m "Add Karma report"
-
-      - name: Push Karma report
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: ./front
-
-  java:
-    if: "!contains(github.event.head_commit.message, 'Add Karma report') && !contains(github.event.head_commit.message, 'Add Jacoco report')"
-    name: Spring Boot
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the source code
-        uses: actions/checkout@v4
-
+        
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
           java-version: '17'
-
+          
       - name: Install dependencies
         run: mvn clean install
         working-directory: back
@@ -84,25 +53,26 @@ jobs:
         run: mvn jacoco:report
         working-directory: back
 
-      - name: Pull latest changes
+      - name: Commit reports
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git pull origin main  
+          git add .
+          git commit -m "Add reports"
 
-      - name: Commit Jacoco report
-        run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git pull origin main
-          git add back/target/site/jacoco
-          git commit -m "Add Jacoco report"
-
-      - name: Push Jacoco report
+      - name: Push reports
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: ./front
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v4
